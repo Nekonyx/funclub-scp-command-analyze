@@ -49,7 +49,7 @@ body {
 }
 
 .group:not(.vertical) *:first-of-type {
-  margin-right: 0;
+  margin-left: 0;
 }
 
 .group:not(.vertical) *:last-of-type {

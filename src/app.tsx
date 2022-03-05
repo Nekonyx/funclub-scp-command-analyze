@@ -19,7 +19,7 @@ export const App: React.FC = () => {
 
   useEffect(() => {
     try {
-      const nextParams = parseSyntax(syntax.trim()).filter(
+      const nextParams = parseSyntax(syntax.replace(/ /g, '_').trim()).filter(
         (param) => param.name && param.name.trim() !== ''
       )
 
@@ -69,7 +69,7 @@ export const App: React.FC = () => {
         {params.map((param, index) => (
           <p key={param.name + index}>
             <span>{index + 1}. </span>
-            <span className="bold">{param.name}: </span>
+            <span className="bold">{param.name.replace(/_/g, ' ')}: </span>
             <span className={param.isRequired ? 'red' : 'green'}>
               {param.isRequired ? 'необходим' : 'дополнительный'}
             </span>
@@ -82,7 +82,7 @@ export const App: React.FC = () => {
         {argsEntries.map(([key, value], index) => (
           <p key={key + index}>
             <span>{index + 1}. </span>
-            <span className="bold blue">{key}: </span>
+            <span className="bold blue">{key.replace(/_/g, ' ')}: </span>
             <span className="bold">{value}</span>
           </p>
         ))}

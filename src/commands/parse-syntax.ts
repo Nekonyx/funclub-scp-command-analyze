@@ -5,12 +5,13 @@ import { CommandParameter } from './command-parameter'
 // 2: name
 // 3: ...
 // 4: >
-const pattern = /(<|\[)(.+?)(\.\.\.)?(>|\])/
+const pattern = /(<|\[)(.+?)(\.\.\.)?(>|\])/g
 
 export const parseSyntax = (syntax: string): CommandParameter[] => {
-  return syntax.split(' ').map((part) => {
-    const [_, openBracket, name, modifier, closeBracket] =
-      pattern.exec(part) ?? []
+  const matches = Array.from(syntax.matchAll(pattern))
+
+  return matches.map((match) => {
+    const [_, openBracket, name, modifier, closeBracket] = match
 
     return new CommandParameter({
       name,
